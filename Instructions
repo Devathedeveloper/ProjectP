@@ -1,0 +1,175 @@
+I'm creating a plants selling application like amazon here are the steps can you ale to create that i'm using react native can you create the files and folders structure and the code for that
+
+Design Key Screens:
+
+a. Home Screen:
+
+Header:
+Logo or App Name centered at the top.
+Icons for Search and Cart on the top right.
+Search Bar:
+Positioned below the header with placeholder text "Search plants..."
+Featured Banner:
+A horizontal scroll area for promotions or featured plants.
+Categories:
+Icons or images representing different plant categories.
+Plant List:
+Grid or list view of plants with images, names, and prices.
+b. Product Details Screen:
+
+Image Carousel:
+Large images of the plant that users can swipe through.
+Plant Name and Price:
+Bold text for the name, with the price below.
+Description:
+Detailed information about the plant.
+Add to Cart Button:
+Prominently displayed, possibly with an icon.
+Additional Information:
+Tabs or sections for Care Instructions, Reviews, etc.
+c. Cart Screen:
+
+List of Items:
+Thumbnail, name, price, quantity selector, and remove option for each item.
+Order Summary:
+Subtotal, taxes, and total amount.
+Checkout Button:
+Clearly visible for easy access.
+d. Checkout Screen:
+
+Shipping Information:
+Input fields for name, address, and contact information.
+Payment Information:
+Options for different payment methods.
+Order Review:
+Summary of items and total cost.
+Place Order Button:
+Finalize the purchase.
+e. Profile Screen:
+
+User Information:
+Display user's name and profile picture.
+Navigation Options:
+Links to Order History, Account Settings, Logout.
+f. Login/Sign-Up Screens:
+
+Input Fields:
+Email, password, confirm password (for sign-up).
+Buttons:
+Login, Sign Up, Forgot Password.
+1.1.4 Prototyping Your App
+Prototyping adds interactivity to your wireframes, simulating the user experience.
+
+Steps to Create a Prototype in Figma:
+
+Linking Screens:
+
+In Prototype mode, select an element (like a button) on your wireframe.
+Drag the blue arrow to the screen you want to navigate to.
+Set the interaction (e.g., "On Tap" ➔ "Navigate To" ➔ Target Screen).
+Defining Interactions:
+
+Set up transitions (e.g., slide, dissolve) to mimic real app behavior.
+Ensure all navigational elements are linked (e.g., Back buttons, Tabs).
+Testing the Prototype:
+
+Use Figma's "Present" mode to interact with your prototype.
+Navigate through the app as a user would to test the flow.
+1.1.5 Tips for Effective Wireframing and Prototyping
+Focus on Functionality: Prioritize the layout and navigation over aesthetic details.
+Consistency is Key: Maintain consistent placement for navigation elements across screens.
+Keep User Experience in Mind: Design with the user's ease of use as the primary goal.
+Use Annotations: Add notes to explain functionality or interactions that aren't immediately obvious.
+Iterate Based on Feedback: Share your wireframes and prototypes with others to gather insights and make improvements.
+1.1.6 Example Wireframe Descriptions
+While I can't provide visual images, I can describe what each screen might look like.
+
+Home Screen:
+
+Top Navigation Bar:
+
+Left: Menu Icon (if using a drawer navigation).
+Center: App Logo or Name.
+Right: Search Icon and Cart Icon with item count badge.
+Search Bar:
+
+Positioned prominently, encouraging users to search for plants.
+Featured Section:
+
+Banner Image promoting a sale or featured plant.
+Call-to-Action button (e.g., "Shop Now").
+Categories:
+
+Scrollable row of Category Cards with images and labels (e.g., "Indoor Plants," "Succulents").
+Popular Plants:
+
+Grid of plant items showing:
+Thumbnail Image
+Plant Name
+Price
+Rating Stars
+Bottom Navigation Bar:
+
+Icons for Home, Categories, Cart, Profile.
+Product Details Screen:
+
+Image Carousel:
+Swipeable images of the plant.
+Plant Name and Price:
+Large font for name, with price below.
+Rating and Reviews:
+Display average rating and link to reviews.
+Description Tab:
+Detailed plant description.
+Care Instructions Tab:
+Specific care tips for the plant.
+Add to Cart Button:
+Bold and easily accessible.
+Wishlist Icon:
+Heart icon to save the plant for later.
+Cart Screen:
+
+List of Cart Items:
+Each item row includes:
+Thumbnail Image
+Plant Name
+Price
+Quantity Selector
+Remove Button
+Order Summary:
+Subtotal
+Shipping Costs
+Total
+Checkout Button:
+Highlighted for visibility.
+Checkout Screen:
+
+Progress Indicator:
+Steps like Shipping ➔ Payment ➔ Confirmation.
+Shipping Information Form:
+Fields for user details and address.
+Payment Method Selection:
+Options for credit/debit cards, PayPal, etc.
+Order Review:
+List of items with totals.
+Place Order Button:
+Final confirmation action.
+1.1.7 Mapping Out User Interactions
+Consider how users will interact with your app:
+
+Tap Gestures: For buttons, product selections, and navigation.
+Swipe Gestures: For image carousels and dismissing notifications.
+Scrolling: Vertical scroll for lists, horizontal scroll for categories.
+1.1.8 Incorporating UX Best Practices
+Accessibility:
+Ensure text is legible with sufficient contrast.
+Buttons and touch targets should be large enough to tap easily.
+Feedback:
+Provide visual feedback on button presses (e.g., color change).
+Show loading indicators when fetching data.
+Error Handling:
+Inform users of errors in a friendly manner (e.g., "Please enter a valid email address").
+Onboarding (Optional):
+Brief introduction screens for first-time users explaining key features.
+
+
