@@ -1,19 +1,16 @@
-// app/screens/cart-screen.tsx
-
-import React, { useState } from "react"
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
-  FlatList,
   TouchableOpacity,
   Image,
   Alert,
-  ScrollView,
-} from "react-native"
-import { Text, Button, Header, TextField } from "../components"
+} from "react-native";
+import { Text, Button, TextField } from "../components";
 import { Ionicons } from '@expo/vector-icons';
-import { spacing, colors } from "../theme"
-import { SafeAreaView } from "react-native-safe-area-context"
+import { spacing, colors } from "../theme";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { FlashList } from '@shopify/flash-list';
 
 const DUMMY_CART_ITEMS = [
   {
@@ -40,16 +37,15 @@ const DUMMY_CART_ITEMS = [
     },
     quantity: 2,
   },
-]
+];
 
 export const CartScreen = () => {
-  const [cartItems, setCartItems] = useState(DUMMY_CART_ITEMS)
-  const [searchQuery, setSearchQuery] = useState("")
-  const [searchResults, setSearchResults] = useState([])
+  const [cartItems, setCartItems] = useState(DUMMY_CART_ITEMS);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = () => {
-    // TODO: Implement search functionality
-  }
+    // Implement search functionality
+  };
 
   const handleRemoveItem = (productId: number) => {
     Alert.alert("Remove Item", "Are you sure you want to remove this item?", [
@@ -58,14 +54,14 @@ export const CartScreen = () => {
         text: "Remove",
         onPress: () => setCartItems(cartItems.filter((item) => item.product.id !== productId)),
       },
-    ])
-  }
+    ]);
+  };
 
   const handleQuantityChange = (productId: number, quantity: number) => {
     setCartItems(
-      cartItems.map((item) => (item.product.id === productId ? { ...item, quantity } : item)),
-    )
-  }
+      cartItems.map((item) => (item.product.id === productId ? { ...item, quantity } : item))
+    );
+  };
 
   const renderCartItem = ({ item }) => (
     <View style={styles.cartItem}>
@@ -103,15 +99,14 @@ export const CartScreen = () => {
         </View>
       </View>
     </View>
-  )
+  );
 
   const subtotal = cartItems
     .reduce((sum, item) => sum + item.product.price * item.quantity, 0)
-    .toFixed(2)
+    .toFixed(2);
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header should be search bar with search icon qr scan icon*/}
       <TextField
         placeholder="Search for products"
         value={searchQuery}
@@ -122,30 +117,22 @@ export const CartScreen = () => {
         style={styles.searchInput}
         inputWrapperStyle={styles.searchWrapper}
         LeftAccessory={() => <Ionicons name="search" size={20} color="#888" />}
-        RightAccessory={() => <Ionicons name="qr-code-sharp" size={20} color="#888" style={styles.qrCodeIcon}/>}
+        RightAccessory={() => <Ionicons name="qr-code-sharp" size={20} color="#888" style={styles.qrCodeIcon} />}
       />
 
-      {cartItems.length > 0 ? (
-        <>
-          <ScrollView style={styles.cartList}>
-            {/* Subtotal */}
-            <View style={styles.subtotalContainer}>
-              <Text style={styles.subtotalText}>
-                Subtotal ({cartItems.length} items):{" "}
-                <Text style={styles.subtotalAmount}>${subtotal}</Text>
-              </Text>
-            </View>
-
-            {/* Cart Items */}
-            <FlatList
-              data={cartItems}
-              renderItem={renderCartItem}
-              keyExtractor={(item) => item.product.id.toString()}
-              contentContainerStyle={styles.cartItemsContainer}
-            />
-          </ScrollView>
-
-          {/* Proceed to Checkout */}
+      <FlashList
+        data={cartItems}
+        renderItem={renderCartItem}
+        keyExtractor={(item) => item.product.id.toString()}
+        ListHeaderComponent={() => (
+          <View style={styles.subtotalContainer}>
+            <Text style={styles.subtotalText}>
+              Subtotal ({cartItems.length} items):{" "}
+              <Text style={styles.subtotalAmount}>${subtotal}</Text>
+            </Text>
+          </View>
+        )}
+        ListFooterComponent={() => (
           <View style={styles.footer}>
             <Button
               text="Proceed to Checkout"
@@ -154,161 +141,40 @@ export const CartScreen = () => {
               onPress={() => Alert.alert("Proceeding to checkout")}
             />
           </View>
-        </>
-      ) : (
-        <View style={styles.emptyContainer}>
-          <Text style={styles.emptyText}>Your Amazon Cart is empty.</Text>
-          <Button
-            text="Shop today's deals"
-            style={styles.shopDealsButton}
-            onPress={() => Alert.alert("Navigate to deals")}
-          />
-        </View>
-      )}
+        )}
+        contentContainerStyle={styles.cartItemsContainer}
+        estimatedItemSize={150} // Adjust based on the average height of your items
+      />
     </SafeAreaView>
-  )
-}
-
+  );
+};
 const styles = StyleSheet.create({
-  searchInput: {
-    // height: 40,
-    // borderWidth: 1,
-    // borderColor: "#ddd",
-    // borderRadius: 5,
-
-    // marginTop: spacing.medium,
+  actionSeparator: {
+    color: "#565959",
+    marginHorizontal: spacing.small,
   },
-  qrCodeIcon: {
-    marginRight: spacing.sm,
+  actionText: {
+    color: "#007185",
+    fontSize: 14,
   },
-  searchWrapper: {
-    borderWidth: 1,
-    paddingHorizontal: spacing.medium,
-    marginHorizontal: spacing.sm,
-    borderRadius: 5,
-    backgroundColor: "#fff",
-    justifyContent: "center",
+  actionsContainer: {
     alignItems: "center",
-    height: 40,
-    // borderWidth: 1,
-    // borderColor: "#ddd",
-    // borderRadius: 5,
+    flexDirection: "row",
   },
-  container: {
-    flex: 1,
-    backgroundColor: "#EAEDED",
+  availabilityText: {
+    color: "#007600",
+    fontSize: 14,
+    marginBottom: spacing.tiny,
   },
-  header: {
+  cartItem: {
     backgroundColor: "#fff",
-    paddingVertical: spacing.medium,
-    paddingHorizontal: spacing.large,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
-  },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: colors.text,
-  },
-  cartList: {
-    flex: 1,
-  },
-  subtotalContainer: {
-    backgroundColor: "#fff",
-    paddingVertical: spacing.medium,
-    paddingHorizontal: spacing.large,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
-  },
-  subtotalText: {
-    fontSize: 18,
-    color: colors.text,
-  },
-  subtotalAmount: {
-    fontWeight: "bold",
-    color: "#B12704",
+    borderRadius: 5,
+    marginBottom: spacing.medium,
+    padding: spacing.medium,
   },
   cartItemsContainer: {
     paddingHorizontal: spacing.medium,
     paddingTop: spacing.medium,
-  },
-  cartItem: {
-    backgroundColor: "#fff",
-    marginBottom: spacing.medium,
-    padding: spacing.medium,
-    borderRadius: 5,
-  },
-  itemRow: {
-    flexDirection: "row",
-  },
-  productImage: {
-    width: 100,
-    height: 100,
-    backgroundColor: "#f0f0f0",
-    marginRight: spacing.medium,
-  },
-  productDetails: {
-    flex: 1,
-  },
-  productName: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: colors.text,
-    marginBottom: spacing.tiny,
-  },
-  sellerText: {
-    fontSize: 14,
-    color: "#565959",
-    marginBottom: spacing.tiny,
-  },
-  availabilityText: {
-    fontSize: 14,
-    color: "#007600",
-    marginBottom: spacing.tiny,
-  },
-  productPrice: {
-    fontSize: 16,
-    color: "#B12704",
-    fontWeight: "bold",
-    marginBottom: spacing.small,
-  },
-  quantityContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: spacing.small,
-  },
-  quantityButton: {
-    borderWidth: 1,
-    borderColor: "#A6A6A6",
-    paddingHorizontal: spacing.small,
-    paddingVertical: spacing.tiny,
-  },
-  quantityButtonText: {
-    fontSize: 16,
-    color: colors.text,
-  },
-  quantityText: {
-    marginHorizontal: spacing.medium,
-    fontSize: 16,
-    color: colors.text,
-  },
-  actionsContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  actionText: {
-    fontSize: 14,
-    color: "#007185",
-  },
-  actionSeparator: {
-    marginHorizontal: spacing.small,
-    color: "#565959",
-  },
-  footer: {
-    padding: spacing.medium,
-    backgroundColor: "#fff",
-    borderTopWidth: 1,
-    borderTopColor: "#ddd",
   },
   checkoutButton: {
     backgroundColor: "#FFD814",
@@ -317,21 +183,96 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   checkoutButtonText: {
-    fontSize: 18,
     color: "#0F1111",
+    fontSize: 18,
     fontWeight: "bold",
   },
-  emptyContainer: {
+  container: {
+    backgroundColor: "#EAEDED",
     flex: 1,
+  },
+  emptyContainer: {
     alignItems: "center",
+    flex: 1,
     justifyContent: "center",
     paddingHorizontal: spacing.large,
   },
   emptyText: {
-    fontSize: 18,
     color: colors.text,
+    fontSize: 18,
     marginBottom: spacing.large,
     textAlign: "center",
+  },
+  footer: {
+    backgroundColor: "#fff",
+    borderTopColor: "#ddd",
+    borderTopWidth: 1,
+    padding: spacing.medium,
+  },
+  itemRow: {
+    flexDirection: "row",
+  },
+  productDetails: {
+    flex: 1,
+  },
+  productImage: {
+    backgroundColor: "#f0f0f0",
+    height: 100,
+    marginRight: spacing.medium,
+    width: 100,
+  },
+  productName: {
+    color: colors.text,
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: spacing.tiny,
+  },
+  productPrice: {
+    color: "#B12704",
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: spacing.small,
+  },
+  qrCodeIcon: {
+    marginRight: spacing.sm,
+  },
+  quantityButton: {
+    borderColor: "#A6A6A6",
+    borderWidth: 1,
+    paddingHorizontal: spacing.small,
+    paddingVertical: spacing.tiny,
+  },
+  quantityButtonText: {
+    color: colors.text,
+    fontSize: 16,
+  },
+  quantityContainer: {
+    alignItems: "center",
+    flexDirection: "row",
+    marginBottom: spacing.small,
+  },
+  quantityText: {
+    color: colors.text,
+    fontSize: 16,
+    marginHorizontal: spacing.medium,
+  },
+  searchInput: {
+    // Style for search input
+  },
+  searchWrapper: {
+    alignItems: "center",
+    backgroundColor: "#fff",
+    borderRadius: 5,
+    borderWidth: 1,
+    height: 40,
+    justifyContent: "center",
+    marginHorizontal: spacing.sm,
+    paddingHorizontal: spacing.medium,
+  },
+  sellerText: {
+    color: "#565959",
+    fontSize: 14,
+    marginBottom: spacing.tiny,
   },
   shopDealsButton: {
     backgroundColor: "#FFD814",
@@ -340,4 +281,20 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: spacing.huge,
   },
+  subtotalAmount: {
+    color: "#B12704",
+    fontWeight: "bold",
+  },
+  subtotalContainer: {
+    backgroundColor: "#fff",
+    borderBottomColor: "#ddd",
+    borderBottomWidth: 1,
+    paddingHorizontal: spacing.large,
+    paddingVertical: spacing.medium,
+  },
+  subtotalText: {
+    color: colors.text,
+    fontSize: 18,
+  },
 })
+// Styles remain the same as previously defined
