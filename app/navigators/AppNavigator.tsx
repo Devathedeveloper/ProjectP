@@ -43,6 +43,10 @@ export type AppStackParamList = {
   SignUp: undefined
   Home: undefined
   main: undefined
+  categoryScreen: undefined
+  categoryDetailsScreen: undefined
+  subCategoryDetailsScreen: undefined
+  productListing: undefined
   // 🔥 Your screens go here
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
@@ -71,7 +75,10 @@ const AppStack = observer(function AppStack() {
       <Stack.Screen name="Profile" component={ProfileScreen} /> */}
       {/* <Stack.Screen name="SignUp" component={SignUpScreen} /> */}
       {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
-      <Stack.Screen name="main" component={MainNavigator} />
+      {/* <Stack.Screen name="main" component={MainNavigator} /> */}
+      {/* <Stack.Screen name="categoryScreen" component={Screens.CategoryListingScreen} /> */}
+      {/* <Stack.Screen name="subCategoryDetailsScreen" component={Screens.SubcategoryScreen} /> */}
+      <Stack.Screen name="productListing" component={Screens.ProductListingScreen} />
 
       {/** 🔥 Your screens go here */}
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}

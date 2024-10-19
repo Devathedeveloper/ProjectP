@@ -18,18 +18,18 @@
 - [ ] Social Login Permissions Screen
     * Displays permissions requested when logging in via social media.
 - [ ] 
-- [ ] 2. Home and Navigation Screens
-- [ ] Home Screen
+- [X] 2. Home and Navigation Screens
+- [ X] Home Screen
     * Displays featured products, categories, and promotional banners.
 - [ ] Side Menu (Drawer Navigation)
     * Provides access to various app sections like Home, Categories, Orders, Wishlist, etc.
-- [ ] Bottom Navigation Bar
+- [X ] Bottom Navigation Bar
     * Quick access to primary sections like Home, Search, Cart, Profile.
 - [ ] 
 - [ ] 3. Product Browsing Screens
-- [ ] Category Listing Screen
+- [X] Category Listing Screen
     * Shows all plant categories (e.g., Indoor, Outdoor, Succulents).
-- [ ] Subcategory Screen
+- [X] Subcategory Screen
     * Displays subcategories under a main category if applicable.
 - [ ] Product Listing Screen
     * Lists all products within a category or search results.
